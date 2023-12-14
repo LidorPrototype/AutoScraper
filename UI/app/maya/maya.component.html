@@ -1,0 +1,125 @@
+<form [formGroup]="mayaForm" novalidate (ngSubmit)="onSubmit()">
+  <div style="display:flex; padding-left: 20px;">
+<mat-card class="maya" style="display: flex; flex-direction: column; border-radius: 22px;">
+  <div style="display:flex; flex-direction: row; padding-right: 20px;">
+  <div mat-card-avatar class="example-header-image">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#006b9d" style="margin-top: 20px;"
+      class="bi bi-cash-coin" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
+      <path
+        d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
+      <path
+        d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
+      <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
+    </svg>
+  </div>
+  <div style="flex-direction: column;">
+  <mat-card-title style="margin-top: 35px; margin-left: 30px; color:#006b9d; font-size: 23px;">Download From Maya</mat-card-title>
+  <mat-card-subtitle style="margin-left: 30px;">Download from Maya site allows to download reports in multiple formats</mat-card-subtitle>
+</div>
+</div>
+<hr class="left-aligned-hr"/>
+  <mat-card-content>
+    <mat-tab-group animationDuration="0ms" (selectedTabChange)="SetServiseType($event)" [selectedIndex]="defaultTabIndex">
+      <mat-tab label="PDF">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Enter Report Name in English</mat-label>
+              <input matInput placeholder="Enter Report Name in English" formControlName="engName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Enter Report Name in Hebrew</mat-label>
+              <input matInput placeholder="Enter Report Name in Hebrew" formControlName="hebName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field  appearance="outline" class="full-width">
+              <mat-label>From date</mat-label>
+              <input matInput [matDatepicker]="fromDatePickerpdf" placeholder="From Date" formControlName="dFrom">
+              <mat-datepicker-toggle [for]="fromDatePickerpdf" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #fromDatePickerpdf></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field  appearance="outline" class="full-width">
+              <mat-label>To date</mat-label>
+              <input matInput [matDatepicker]="toDatePickerpdf" placeholder="To Date" formControlName="dTo">
+              <mat-datepicker-toggle [for]="toDatePickerpdf" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #toDatePickerpdf></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="HTML">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Enter Report Name in English</mat-label>
+              <input matInput placeholder="Enter Report Name in English" formControlName="engName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Enter Report Name in Hebrew</mat-label>
+              <input matInput placeholder="Enter Report Name in Hebrew" formControlName="hebName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Select Format</mat-label>
+              <mat-select placeholder="Select Format" formControlName="format" panelClass="dropDown-panel">
+                <mat-option *ngFor="let fmt of formats" [value]="fmt.value" [disabled]="fmt.disable">
+                  {{ fmt.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="mayaForm.controls['format'].hasError('required')">
+                State is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>From date</mat-label>
+              <input matInput [matDatepicker]="fromDatePickerhtml" placeholder="From Date" formControlName="dFrom">
+              <mat-datepicker-toggle [for]="fromDatePickerhtml" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #fromDatePickerhtml></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>To date</mat-label>
+              <input matInput [matDatepicker]="toDatePickerhtml" placeholder="To Date" formControlName="dTo">
+              <mat-datepicker-toggle [for]="toDatePickerhtml" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #toDatePickerhtml></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button type="submit" [disabled]="mayaForm.invalid || disableBtn">Render Request</button>
+    <button mat-raised-button color="accent" *ngIf="!hideSchedule" [disabled]="showSchedule " type="button" (click)="openSchedule()">Schedule</button>
+  </mat-card-actions>
+  <mat-progress-bar *ngIf="loader" [mode]="'indeterminate'"></mat-progress-bar>
+</mat-card>
+</div>
+</form>

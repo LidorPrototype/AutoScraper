@@ -1,0 +1,45 @@
+<form [formGroup]="dapiForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="dapi">
+    <mat-card-header>
+      <mat-card-title style="color: #006b9d">Download From API</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Enter API Link</mat-label>
+            <input matInput placeholder="please enter Wanted API link" formControlName="api">
+          </mat-form-field>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Enter File Name</mat-label>
+            <input matInput placeholder="Enter File Name" formControlName="filename">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>File Format</mat-label>
+            <mat-select placeholder="Select Format" formControlName="format">
+              <mat-option *ngFor="let format of formats" [value]="format.value">
+                {{ format.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dapiForm.controls['format'].hasError('required')">
+              Format is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Scrape Request!</button>
+      <button mat-raised-button class="green-back" type="button" (click)="SendRequest()"><mat-icon>calendar_month</mat-icon> To schedule</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>

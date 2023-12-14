@@ -1,0 +1,127 @@
+<mat-card class="dquery">
+  <mat-card-header>
+    <mat-card-title style="color: #006b9d">Download From Query</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Enter Website URL</mat-label>
+          <input matInput placeholder="Enter Website URL" [(ngModel)]="url">
+        </mat-form-field>
+      </div>
+    </div>
+
+      <mat-accordion class="example-headers-align" multi>
+<!--QUERY-->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Add Query
+            </mat-panel-title>
+            <mat-panel-description>
+              
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Query Name</mat-label>
+                <input matInput type="text" placeholder="Field Name" [(ngModel)]="query.name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Query Value</mat-label>
+                <input matInput type="text" placeholder="example Of Value" [(ngModel)]="query.value">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button mat-raised-button style="background-color: #da8f32; color: white;  border-radius: 10px;" (click)="updatefield(query)" type="button" class="form-field-c">Add Field</button>
+            </div>
+          </div>
+          <div class="row" *ngFor="let item of queryList; let i=index">
+            <div class="col">
+              <div appearance="outline" class="full-width">
+                {{item.name}}
+              </div>
+            </div>
+            <div class="col">
+              <div appearance="outline" class="full-width">
+                {{item.value}}
+              </div>
+            </div>
+            <div>
+              <button mat-raised-button color="warn" (click)="removefield(i)" type="button" class="form-field-c">Remove</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+<!--METADATA-->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Add Metadata
+            </mat-panel-title>
+            <mat-panel-description>
+              
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Metadata Name</mat-label>
+                <input matInput type="text" placeholder="Field Name" [(ngModel)]="metadata.name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Metadata Value</mat-label>
+                <input matInput type="text" placeholder="example Of Value" [(ngModel)]="metadata.value">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button mat-raised-button style="background-color: #da8f32; color: white; border-radius: 10px;" (click)="updateMetafield(metadata)" type="button" class="form-field-c">Add Field</button>
+            </div>
+          </div>
+          <div class="row" *ngFor="let item of metadataList; let i=index">
+            <div class="col">
+              <div appearance="outline" class="full-width">
+                {{item.name}}
+              </div>
+            </div>
+            <div class="col">
+              <div appearance="outline" class="full-width">
+                {{item.value}}
+              </div>
+            </div>
+            <div>
+              <button mat-raised-button color="warn" (click)="removeMetafield(i)" type="button" class="form-field-c">Remove</button>
+            </div>
+          </div>
+        </mat-expansion-panel>        
+      </mat-accordion>
+
+      <div class="row">
+        <mat-checkbox class="example-margin" [(ngModel)]="removeHTML">Remove HTML tags</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="emptycells">Remove empty cells</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="splitlines" (click)="showExtention()">Split lines</mat-checkbox>
+      </div>
+      <hr />
+      <div class="row" [hidden]="!extentionV">
+          <span>Remove cells with one char</span>
+          <section class="example-section">
+            <label class="example-margin">Align:</label>
+            <mat-radio-group [(ngModel)]="radioselection">
+              <mat-radio-button class="example-margin" value="after">After</mat-radio-button>
+              <mat-radio-button class="example-margin" value="before">Before</mat-radio-button>
+            </mat-radio-group>
+          </section>
+      </div>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Scrape Request!</button>
+  </mat-card-actions>
+  <mat-progress-bar *ngIf="loader" [mode]="'indeterminate'"></mat-progress-bar>
+</mat-card>

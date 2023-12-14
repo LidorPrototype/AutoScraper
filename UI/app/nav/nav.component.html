@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+      <div class="menuHeader">DS<div style="color: #da8f32">AAS</div></div>
+      <hr class="left-aligned-hr"/>
+      <mat-selection-list [multiple]="false">
+        <!-- Dropdown list option -->
+        <mat-list-option style="color: white; " class="menuItem dropdown" (click)="toggleDropdown()">
+          <span>
+            Auto Scrapper&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="width: 1em; height: 1em;"><path style="fill: white;" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+          </span>
+          <div class="dropdown-options" *ngIf="showDropdown">
+            <button mat-menu-item routerLink='/home' [class.hovered-option]="isHovered('home')" (mouseenter)="setHoveredRoute('home')"(mouseleave)="setHoveredRoute(null)">
+              New Request</button><br>
+            <button mat-menu-item routerLink="/userRequests" [class.hovered-option]="isHovered('userRequests')" (mouseenter)="setHoveredRoute('userRequests')" (mouseleave)="setHoveredRoute(null)">
+              Requests</button><br>
+            <button mat-menu-item routerLink="/logs" [class.hovered-option]="isHovered('logs')" (mouseenter)="setHoveredRoute('logs')" (mouseleave)="setHoveredRoute(null)">
+              Logs</button><br>
+            <button mat-menu-item routerLink="/manageControl" [class.hovered-option]="isHovered('manageControl')" (mouseenter)="setHoveredRoute('manageControl')" (mouseleave)="setHoveredRoute(null)">
+              Manage Control</button><br>
+            <button mat-menu-item><a href="<INSERT AIRFLOW LOCAL LINK>" target="_blank" style="color: white; text-decoration: none;">Special Dags</a></button><br>
+          </div>
+        </mat-list-option>
+        <mat-list-option routerLink="/textai" style="color: white;" class="menuItem"
+                         [class.hovered-option]="isHovered('textai')"
+                         (mouseenter)="setHoveredRoute('textai')"
+                         (mouseleave)="setHoveredRoute(null)">Text Analysis
+        </mat-list-option>
+      </mat-selection-list>
+      <a class="contact-us" href = "mailto: DSAAS-Support@<INSERT EMAIL EXTENSION>">Need assistance? Contact us!</a>
+  </mat-sidenav>
+  <mat-sidenav-content style="background-color: white;">
+    <mat-toolbar class="navbar-background" >
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon" style="color: rgb(0, 116, 194);">menu</mat-icon>
+      </button>
+
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

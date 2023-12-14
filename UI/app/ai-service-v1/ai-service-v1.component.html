@@ -1,0 +1,107 @@
+
+  <div style="display:flex; flex-direction: row; padding-right: 20px;">
+    <div mat-card-avatar class="example-header-image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#006b9d" style="margin-top: 10px;"
+        class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+        <path
+          d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
+        <path
+          d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+      </svg>
+    </div>
+    <mat-card-title style="margin-top: 50px; margin-left: 30px; color:#006b9d; font-size: 23px;">Read Text From
+      PDF</mat-card-title>
+  </div>
+  <hr class="left-aligned-hr" />
+  <div style="margin: 10px; width: 80%;">
+    <mat-grid-list cols="6" rowHeight="100px" gutterSize="0">
+      <mat-grid-tile [colspan]="3">
+        <mat-form-field>
+            <mat-toolbar>
+              <!-- Display files names -->
+              <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+              <!-- Browse Button -->
+              <button>
+                <mat-icon>file_upload</mat-icon>
+              </button>
+            </mat-toolbar>
+            <!-- Fetch selected filed on change -->
+            <input  type="file" #fileInput id="uploadFile" (change)="onSelectNewFile($event)"
+              name="uploadFile" multiple="multiple" placeholder="Upload file" accept=".pdf" />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2">
+        <label class="example-margin"><b>Separate By:</b></label>
+        <mat-radio-group [(ngModel)]="pagging">
+          <mat-radio-button class="example-margin" value="Pages">Pages</mat-radio-button>
+          <mat-radio-button class="example-margin" value="Titles">Titles</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1">
+        <button mat-raised-button [disabled]="!fileselected || !pagging" (click)="sendFile()"
+          aria-label="Convert PDF DATA to Text" title="Convert PDF DATA to Text">
+          <mat-icon>text_snippet</mat-icon> Parse PDF
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <mat-grid-list cols="2">
+    <mat-grid-tile [colspan]="1" [rowspan]="5">
+      <div class="font-container results" id="scrollbar">
+        <div *ngIf="loaded && searched; else displaySpinner1">
+          <mat-card *ngFor="let item of resultText" class="mat-elevation-z2">
+            <h3><b>{{item.type}}</b></h3>
+            <div class="button-row">
+              <button class="actionButton" mat-icon-button aria-label="" title="Summeraize Text" (click)="GetSummary(item.value,item.type)">
+                <mat-icon>subject</mat-icon>
+              </button>
+              <button class="actionButton" mat-icon-button aria-label="" title="Find All Entities" (click)="GetNER(item.value,item.type)">
+                <mat-icon>people</mat-icon>
+              </button>
+              <button class="actionButton" mat-icon-button aria-label="" title="Show Sentiment" (click)="GetSentiment(item.value,item.type)">
+                <mat-icon>sentiment_satisfied</mat-icon>
+              </button>
+            </div>
+            {{item.value}}
+          </mat-card>
+        </div>
+        <ng-template #displaySpinner1>
+          <span *ngIf="errorText1" style="color: red;">{{errorText1}}</span>
+          <div *ngIf="searched && !errorText1">
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
+        <ng-template #displaySpinner2>
+          <span *ngIf="errorText2" style="color: red;">{{errorText2}}</span>
+          <div *ngIf="searched && !errorText2">
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="5">
+      <div class="font-container results">
+        <mat-card *ngIf="loaded && searched; else displaySpinner2" class="mat-elevation-z2">
+          <h3><b>Summary of: {{summary.textType}}</b></h3>
+          <mat-progress-bar mode="query" *ngIf="!gotSummary"></mat-progress-bar>
+          {{summary.textarea}}<br><br>
+          <h3><b>Entities: </b></h3>
+          <mat-progress-bar mode="query" *ngIf="!gotEntities"></mat-progress-bar>
+          <div *ngFor="let item of entities">
+            <b>{{item.type}}</b>
+            <mat-chip-list cdkDropList cdkDropListOrientation="horizontal">
+              <mat-chip selected cdkDrag *ngFor="let entity of item.value">
+                {{entity}}
+              </mat-chip>
+            </mat-chip-list>
+            <br>
+          </div><br><br>
+          <h3><b>Sentiment is:</b></h3>
+          <div style="white-space: pre-line;"> {{score | prettyPipe}}</div>
+          <span *ngIf="errorSentiment" style="color: red">{{errorSentiment}}</span>
+          <mat-progress-bar mode="query" *ngIf="!gotSentiment"></mat-progress-bar>
+        </mat-card>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>

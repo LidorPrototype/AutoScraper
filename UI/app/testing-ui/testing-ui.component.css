@@ -1,0 +1,8 @@
+.mat-card{
+    margin: 5px auto;
+    width: 100%;
+}
+.card-container{
+    display: grid;
+    width: 100%;
+}

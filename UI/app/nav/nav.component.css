@@ -1,0 +1,109 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 220px;
+  background-color: #0d2b3b;
+  color: white;
+  padding-right: 20px;
+  border-radius: 0; /*0 30px 30px 0;*/
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+  background-color: white;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.contact-us {
+  color: aliceblue;
+  bottom: 40px;
+  left: 5px;
+  position:fixed;
+  padding: 5px;
+}
+
+.navbar-background{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+.shadow{
+  color: transparent;
+  position: absolute;
+  font-size: xx-large;
+  line-height: 1.1;
+  font-weight: 900;
+  text-shadow: 3px -1px 1px #333 ;
+  top:15px;
+  z-index: -1;
+}
+
+.mat-drawer-content{
+  background-color: white;
+}
+
+.menuHeader{
+  font-size: xx-large;
+  margin: 15px;
+  margin-top: 35px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.hovered-option, .dropdown:hover {
+  background-color: rgb(71, 71, 71);
+  color: white;
+}
+
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+  height: fit-content;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.menuItem{
+  border-radius: 10px;
+  margin: 5px;
+  max-width: 180px;
+  position: relative;
+}
+
+.left-aligned-hr {
+  width: 70%;
+  margin-left: 15px;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  height: 3px;
+  background-color: white;
+  border: none;
+}
+
+/* DROPDOWN */
+.dropdown-options button{
+  box-shadow: none;
+  border: 0;
+  background: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 5px;
+}
+.dropdown-options button:hover{
+  background-color: #da8f32;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 5px;
+}

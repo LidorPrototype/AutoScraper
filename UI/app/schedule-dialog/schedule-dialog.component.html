@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Schedule</h2>
+<form [formGroup]="scheduleModel" novalidate (ngSubmit)="ScheduleRequest()"> 
+<mat-dialog-content>      
+            <mat-form-field appearance="outline" class="full-width" style="height: min-content;">
+                <mat-label>Cron</mat-label>
+                <input matInput type="text" formControlName="cron" placeholder="User Cron To Determine the frequency">
+                <a matSuffix target="_blank" href="https://crontab.guru/"><mat-icon >info</mat-icon></a>
+            </mat-form-field>
+            <h5 style=" color: red; max-height: min-content; margin-top: -20px;">Spacing between each crom parameter is required. example:  <b>* 4 0 * 6</b></h5>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Start date</mat-label>
+                <input matInput [matDatepicker]="startDatePickerhtml" placeholder="date for start scraping" formControlName="start_date">
+                <mat-datepicker-toggle [for]="startDatePickerhtml" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #startDatePickerhtml></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>End date</mat-label>
+                <input matInput [matDatepicker]="endDatePickerhtml" placeholder="Until date" formControlName="end_date">
+                <mat-datepicker-toggle [for]="endDatePickerhtml" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #endDatePickerhtml></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Select Destination</mat-label>
+            <mat-select placeholder="Select Destination" formControlName="DestinationID">
+                <mat-option *ngFor="let dest of Destination" [value]="dest.value">
+                {{ dest.name }}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Output FileName</mat-label>
+            <input matInput type="text" formControlName="output_name" placeholder="prefix of filename - by default, name will include date in format yyyyMMdd">
+            </mat-form-field>
+            <h5 style=" color: red; max-height: min-content; margin-top: -20px;">Remember to add "_autoPrivate" before the dot(.) in the name.</h5>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>[INSERT COMPANY NAME] Email</mat-label>
+                <input type="email" placeholder="Enter your <INSERT COMPANY NAME> Email" matInput formControlName="user" />
+                </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea placeholder="what the task going to do? for who? for what? (Can't user '' or ')" matInput formControlName="description" rows="2"></textarea>
+            </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <label style="width: 100%;" [hidden]="responsebool">{{responseMessage | prettyPipe}}</label>
+    <button mat-raised-button color="accent" [disabled]="scheduleModel.invalid" type="submit"><mat-icon>calendar_month</mat-icon> Schedule</button>
+    <button mat-raised-button color="basic" [mat-dialog-close]="scheduleModel"><mat-icon>close</mat-icon> Close</button>
+</mat-dialog-actions>
+
+</form>

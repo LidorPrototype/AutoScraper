@@ -1,0 +1,103 @@
+<div style="padding: 1%;">
+    <h1 class="mat-h1">Manage Control</h1>
+    <hr class="left-aligned-hr2" />
+    <button mat-icon-button title="Refresh Table" (click)="refreshAll()">
+        <mat-icon>refresh</mat-icon>
+    </button>
+    <mat-form-field appearance="standard" style="width: 80vw;">
+        <mat-label>Enter Search Parameter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Enter filter values for any field" #input>
+    </mat-form-field>
+    <table class="manage-control mat-elevation-z2" mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+        <ng-container matColumnDef="DAG_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DAG Name </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.DAG_Name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="DestinationID">
+            <th mat-header-cell *matHeaderCellDef> Destination ID </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.DestinationID}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="cron">
+            <th mat-header-cell *matHeaderCellDef> Cron </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.cron}} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"
+                style="color: red; text-decoration: double; font-size: 20px; max-width: 50px; padding-right: 50px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <span style="color: rgba(0, 0, 0, 0.87); font-size: 14px; cursor: pointer;"> {{element.description}}</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="output_name">
+            <th mat-header-cell *matHeaderCellDef> Output Name </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.output_name}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.start_date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="end_date">
+            <th mat-header-cell *matHeaderCellDef> End Date </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.end_date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef> User </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.user}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();"> {{element.status |
+                titlecase}} </td>
+        </ng-container>
+        <ng-container matColumnDef="changeStatus">
+            <th mat-header-cell *matHeaderCellDef> Change Status </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();">
+                <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="element.status">
+                    <mat-button-toggle
+                        [disabled]="(element.originalStatus == 'pending' && (s == 'disabled')) || (element.originalStatus == 'deleted' && (s == 'disabled'))"
+                        *ngFor="let s of statuses" (change)="toggleStatus(element, s)" [value]="s">
+                        <div *ngIf="s == 'created';else other_content">
+                            Enable
+                        </div>
+                        <ng-template #other_content>{{ s | titlecase| slice:0:-1 }}</ng-template>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation();">
+                <button mat-raised-button (click)="toggleAction('View', element)">View</button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <div class="example-element-detail" [@detailExpand]="
+                    element == expandedElement ? 'expanded' : 'collapsed'
+                  ">
+                    <b>Description:</b> {{element.description}}
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                <div *ngIf="!filterInserted;else other_content"></div>
+                <ng-template #other_content>
+                    No data matching the filter "{{input.value}}"
+                </ng-template>
+            </td>
+        </tr>
+    </table>
+    <!-- Loading Area -->
+    <mat-progress-bar *ngIf="!loaded;" [mode]="'indeterminate'"></mat-progress-bar>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>

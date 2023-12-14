@@ -1,0 +1,124 @@
+<div style="display:flex; padding-left: 20px;">
+  <div>
+    <mat-card class="draw" style="justify-self: left; flex-direction: column; border-radius: 22px;">
+      <div style="display:flex; flex-direction: row; padding-right: 20px;">
+        <div mat-card-avatar class="example-header-image">
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#006b9d" style="margin-top: 10px;"
+            class="bi bi-filetype-raw" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M14 4.5V14a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.597 11.85H0v3.999h.782v-1.491h.71l.7 1.491h1.651l.313-1.028h1.336l.314 1.028h.84L5.31 11.85h-.925l-1.329 3.96-.783-1.572A1.18 1.18 0 0 0 3 13.116c0-.256-.056-.479-.167-.668a1.098 1.098 0 0 0-.478-.44 1.669 1.669 0 0 0-.758-.158Zm-.815 1.913v-1.292h.7a.74.74 0 0 1 .507.17c.13.113.194.276.194.49 0 .21-.065.368-.194.474-.127.105-.3.158-.518.158H.782Zm4.063-1.148.489 1.617H4.32l.49-1.617h.035Zm4.006.445-.74 2.789h-.73L6.326 11.85h.855l.601 2.903h.038l.706-2.903h.683l.706 2.903h.04l.596-2.903h.858l-1.055 3.999h-.73l-.74-2.789H8.85Z" />
+          </svg>
+        </div>
+        <mat-card-title style="margin-top: 50px; margin-left: 30px; color:#006b9d; font-size: 23px;">Scrapping Raw
+          Data</mat-card-title>
+      </div>
+      <hr class="left-aligned-hr" />
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Enter Website URL</mat-label>
+              <input matInput placeholder="Enter Website URL" [(ngModel)]="url">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Field Name</mat-label>
+              <input matInput type="text" placeholder="Field Name" [(ngModel)]="name">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Field Value</mat-label>
+              <input matInput type="text" placeholder="example Of Value" [(ngModel)]="value">
+            </mat-form-field>
+          </div>
+          <div class="col" >
+            <button mat-raised-button
+              (click)="updatefield()" type="button" class="form-field-c">Add Field</button>
+          </div>
+        </div>
+        <div class="row" *ngFor="let item of array; let i=index">
+          <div class="col">
+            <div appearance="outline" class="full-width">
+              {{item.name}}
+            </div>
+          </div>
+          <div class="col">
+            <div appearance="outline" class="full-width">
+              {{item.value}}
+            </div>
+          </div>
+          <div>
+            <button mat-raised-button color="warn" (click)="removefield(i)" type="button"
+              class="form-field-c">Remove</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Remove Duplicates?</mat-label>
+              <mat-select placeholder="Select Format" [(ngModel)]="duplicate" panelClass="dropDown-panel">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let yn of ynAnsware" [value]="yn.value">
+                  {{ yn.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions >
+        <button mat-raised-button type="button"
+          [disabled]="url == '' || array.length == 0 || duplicate == null || stopBtn" (click)="onSubmit()">Scrape
+          Request!</button>
+        <button mat-raised-button color="accent" *ngIf="!hideSchedule"
+          [disabled]="showSchedule || url == '' || array.length == 0 || duplicate == null" type="button"
+          (click)="openSchedule()">Schedule</button>
+      </mat-card-actions>
+      <mat-progress-bar *ngIf="loader" [mode]="'indeterminate'"></mat-progress-bar>
+    </mat-card>
+    <mat-card class="draw" *ngIf="state">
+      <div id="print-section">
+        <mat-grid-list cols="2" rowHeight="90px">
+          <mat-grid-tile class="grid_left">
+            <h3 style="text-align: left; width: 100%; color: #006b9d; font-weight: 500;">Number Of Objects: {{viewItems.length}}</h3>
+          </mat-grid-tile>
+          <mat-grid-tile class="grid_right" >
+            <button class="actionButton" (click)="dounloadAsCSV()" mat-icon-button color="basic">
+              <mat-icon style="margin-top: -20px;">get_app</mat-icon></button>
+            <button class="actionButton"  printSectionId="print-section" ngxPrint mat-icon-button color="basic">
+              <mat-icon style="margin-top: -20px;">print</mat-icon></button>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <table class="res-table mat-elevation-z8" style="width: 100%; border-radius: 20px;">
+
+          <thead>
+            <tr>
+              <th>index</th>
+              <th *ngFor="let item of arr">{{item}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of viewItems ">
+              <td [hidden]="item[0] == null">{{item[0]}}</td>
+              <td [hidden]="item[1] == null">{{item[1]}}</td>
+              <td [hidden]="item[2] == null">{{item[2]}}</td>
+              <td [hidden]="item[3] == null">{{item[3]}}</td>
+              <td [hidden]="item[4] == null">{{item[4]}}</td>
+              <td [hidden]="item[5] == null">{{item[5]}}</td>
+              <td [hidden]="item[6] == null">{{item[6]}}</td>
+              <td [hidden]="item[7] == null">{{item[7]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+    </mat-card>
+  </div>
+
+</div>

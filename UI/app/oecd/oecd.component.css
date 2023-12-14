@@ -1,0 +1,84 @@
+.full-width {
+  width: 100%;
+}
+
+.mat-radio-button {
+  display: block;
+  margin: 5px 0;
+}
+
+form{
+  display: flex;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+  width: 100%;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.download-card {
+  width: 600px;
+  margin: 20px auto;
+  padding-left: 20px;
+  background-color: #ececec50;
+}
+
+.left-aligned-hr {
+  width: 60%;
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  height: 3px;
+  background-color: #DA8F32;
+  border: none;
+}
+
+button{
+  border-radius: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #DA8F32;
+  color: white;
+  border-color: transparent;
+}
+
+button:hover{
+ background-color: #006b9d;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #006b9d;
+  outline-width: 5px;
+}
+
+::ng-deep .mat-form-field-outline-start {
+  border-radius: 20px 0 0 20px !important;
+  min-width: 28px !important;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 20px 20px 0 !important;
+}
+
+::ng-deep .mat-form-field-label .ng-star-inserted {
+  padding-left: 30px;
+ }
+ 
+ ::ng-deep .mat-form-field-label .mat-form-field-required-marker {
+  padding-left: 0px;
+ }

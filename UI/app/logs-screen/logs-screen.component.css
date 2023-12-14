@@ -1,0 +1,81 @@
+.mat-header-cell {
+  flex-direction: column;
+  flex: 0 0 75px;
+  font-weight: bolder;
+  font-size: large;
+  display: table-cell;
+}
+
+.logs-screen {
+  display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #ececec50;
+}
+
+.mat-header-cell{
+  background-color: #aaa1a150;
+}
+
+.mat-cell {
+  word-wrap: break-word !important;
+  white-space: pre !important;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.mat-progress-bar {
+  width: 50%;
+  margin-inline-start: 25%;
+  height: 15px;
+  border-radius: 32px;
+}

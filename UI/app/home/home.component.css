@@ -1,0 +1,76 @@
+.grid-container {
+  margin-left: 20px;
+}
+
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mat-h1{
+  font-weight: 600;
+  color: #006b9d;
+  margin-left: 24px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 32px;
+  bottom: 15px;
+}
+.matcardtitle{
+  margin-top: 30px;
+}
+.card-dash {
+  width: 80%;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  border-radius: 18px;
+  margin-bottom: 30px;
+  background-color: #ececec50;
+}
+.example-header-image {
+  background-size: cover;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+a{
+  border-radius: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #DA8F32;
+  color: white;
+  border-color: transparent;
+}
+
+a:hover{
+  background-color: #006b9d;
+}
+
+mat-grid-list{
+  display: flex;
+}
+
+.left-aligned-hr {
+  width: 90%;
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  height: 3px;
+  background-color: #DA8F32;
+  border: none;
+}
+
+.left-aligned-hr2 {
+  width: 30%;
+  margin-left: 23px;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  height: 3px;
+  background-color: #DA8F32;
+  border: none;
+}

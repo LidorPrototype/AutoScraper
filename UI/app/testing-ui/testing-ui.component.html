@@ -1,0 +1,58 @@
+<div>
+<mat-card class="example-card">
+    <mat-card-content>
+      <mat-grid-list cols="3" rowHeight="50px">
+        <mat-grid-tile [colspan]="1">
+          <div>
+            <mat-form-field>
+              <div>
+                <mat-toolbar>
+                  <!-- Display files names -->
+                  <input matInput readonly name="name" />
+                  <!-- Browse Button -->
+                  <button mat-mini-fab color="accent">
+                    <mat-icon>file_upload</mat-icon>
+                  </button>
+                </mat-toolbar>
+                <!-- Fetch selected filed on change -->
+                <input type="file" #fileInput id="uploadFile" name="uploadFile"
+                  multiple="multiple" placeholder="Upload file" accept=".pdf" />
+              </div>
+            </mat-form-field>
+            <mat-hint>hncfgbfcgbfg</mat-hint>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+          <section class="example-section">
+            <label class="example-margin"><b>Separate By:</b></label>
+            <mat-radio-group >
+              <mat-radio-button class="example-margin" value="Pages">Page's</mat-radio-button>
+              <mat-radio-button class="example-margin" value="Titles">Titles</mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+          <button mat-raised-button color="primary" aria-label="Convert PDF DATA to Text"
+            title="Convert PDF DATA to Text">
+            <mat-icon>text_snippet</mat-icon> Exctract
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+        <div class="card-container">
+            <mat-card>1</mat-card>
+            <mat-card>2</mat-card>
+            <mat-card>3</mat-card>
+            <mat-card>4</mat-card>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        
+    </mat-grid-tile>
+</mat-grid-list>
+

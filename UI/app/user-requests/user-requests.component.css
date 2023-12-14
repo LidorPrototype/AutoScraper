@@ -1,0 +1,149 @@
+.mat-header-cell {
+  flex-direction: column;
+  flex: 0 0 75px;
+  font-weight: bolder;
+  font-size: large;
+  display: table-cell;
+  background-color: #aaa1a150;
+}
+
+.user-requests {
+  display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #ececec50;
+}
+
+.mat-h1{
+  font-weight: 600;
+  color: #006b9d;
+  margin-left: 24px;
+}
+
+.left-aligned-hr2 {
+  width: 30%;
+  margin-left: 23px;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  height: 3px;
+  background-color: #DA8F32;
+  border: none;
+}
+
+.mat-cell {
+  word-wrap: break-word !important;
+  white-space: pre !important;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.mat-progress-bar {
+  width: 50%;
+  margin-inline-start: 25%;
+  height: 15px;
+  border-radius: 32px;
+}
+.mat-progress-bar-area-text {
+  justify-content: center;
+  display: flex;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.top-row-item {
+  flex-grow: 1;
+  margin: 5px;
+}
+
+#refresh {
+  flex-basis: 10%;
+  max-width: 5%;
+  width: auto;
+}
+
+#filter-input {
+  flex-basis: 70%;
+  max-width: 80%;
+  width: 100%;
+}
+
+#filters-btn {
+  flex-basis: 20%;
+  max-width: 20%;
+  width: auto;
+}
+
+::ng-deep.mat-dialog-container {
+  border-radius: 32px !important;
+  overflow: hidden;
+  background-color: whitesmoke;
+}
+::ng-deep.mat-dialog-container::-webkit-scrollbar{
+  background: transparent !important;
+}
+::ng-deep.mat-dialog-container::-webkit-scrollbar-thumb {
+  background-color: transparent !important;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .top-row-item {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}

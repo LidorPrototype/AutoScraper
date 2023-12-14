@@ -1,0 +1,41 @@
+<form [formGroup]="downloadUrl" novalidate (ngSubmit)="onSubmit()">
+  <div style="display:flex; padding-left: 20px;">
+  <mat-card class="download-card" style="display: flex; flex-direction: column; width: 400px; border-radius: 22px;">
+    <div style="display:flex; flex-direction: row; padding-right: 20px;">
+      <div mat-card-avatar class="example-header-image">
+        <svg xmlns="http://www.w3.org/2000/svg"  width="60" height="60" fill="#006b9d" style="margin-top: 10px;" 
+          class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+          <path
+            d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
+          <path
+            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+        </svg>
+      </div>
+      <mat-card-title   style="margin-top: 50px; margin-left: 30px; color:#006b9d; font-size: 23px;">Download From API</mat-card-title>
+    </div>
+    <hr class="left-aligned-hr"/>
+    <mat-card-content>
+      <div class="col" style="margin-left: 5px;">
+        <div class="col" >
+          <mat-form-field appearance="outline" class="custom-input">
+            <mat-label >Enter URL</mat-label>
+            <input matInput placeholder="URL" formControlName="url" required>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="custom-input">
+            <mat-label  >Enter Filename with Type</mat-label>
+            <input matInput placeholder="file name with type" formControlName="fileName" required>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions style="margin-left: 5px;">
+      <button mat-raised-button type="submit" [disabled]="downloadUrl.invalid || tryItLock">Try it</button>
+      <button mat-raised-button color="accent" *ngIf="!hideSchedule" [disabled]="showSchedule || downloadUrl.invalid" type="button" (click)="openSchedule()">Schedule</button>
+    </mat-card-actions>
+    <mat-progress-bar *ngIf="hideloader" [mode]="'indeterminate'"></mat-progress-bar>
+  </mat-card>
+</div>
+</form>
